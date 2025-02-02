@@ -1,0 +1,55 @@
+# ไฟล์ .gitignore ที่ปรับปรุงแล้วสำหรับ Flutter
+
+### Flutter เฉพาะ ###
+**/build/
+**/android/
+**/ios/
+**/web/
+**/windows/
+**/linux/
+**/macos/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+.packages
+*.iml
+*.lock
+*.log
+*.json
+*.keystore
+*.jks
+
+### IDE ###
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+### ระบบปฏิบัติการ ###
+.DS_Store
+Thumbs.db
+
+### Environment ###
+.env
+.env.local
+.env.development
+.env.production
+
+### Firebase ###
+**/firebase-debug.log
+**/firebase-app-distro.log
+
+### ไฟล์ Generated ###
+**/generated_plugin_registrant.dart
+**/Generated.xcconfig
+**/Pods/
+
+### เอกสาร ###
+doc/
+**/doc/api/
+
+### ข้อยกเว้น ###
+!README.md
