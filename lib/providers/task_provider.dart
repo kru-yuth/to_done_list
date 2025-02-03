@@ -26,5 +26,10 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void editTask(int index, Task newTask) {
+    _tasksBox.putAt(index, newTask); // อัปเดตข้อมูลใน Hive
+    notifyListeners(); // แจ้งให้ UI อัปเดต
+  }
+
   int get totalScore => tasks.fold(0, (sum, task) => sum + task.difficulty);
 }

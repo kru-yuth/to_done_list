@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_done_list/providers/task_provider.dart';
 import 'package:to_done_list/screens/add_task_screen.dart';
+import 'edit_task_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  void _navigateToEditScreen(BuildContext context, int index) {
+    final taskProvider = Provider.of<TaskProvider>(context, listen: false);
+    final task = taskProvider.tasks[index];
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EditTaskScreen(
+          index: index,
+          task: task,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +50,20 @@ class HomeScreen extends StatelessWidget {
           key: Key(taskProvider.tasks[index].title),
           background: Container(color: Colors.red),
           onDismissed: (direction) => taskProvider.deleteTask(index),
-          child: ListTile(
-            title: Text(taskProvider.tasks[index].title),
-            subtitle: Text(
-              '${taskProvider.tasks[index].category} • '
-              '⭐' * taskProvider.tasks[index].difficulty,
+          child: Card(
+            child: ListTile(
+              title: Text(taskProvider.tasks[index].title),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      'วันที่: ${DateFormat('dd/mm/yyy').format(taskProvider.tasks[index].date)}'),
+                  Text('ความยาก: ${'⭐'* taskProvider.tasks[index].difficulty}'),
+                ],
+              ),
+              trailing: IconButton(
+                onPressed: () => _navigateToEditScreen(context, index), 
+                icon: const Icon(Icons.edit)),
             ),
           ),
         ),

@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox<Task>('tasks');
   runApp(
     MultiProvider(
       providers: [
